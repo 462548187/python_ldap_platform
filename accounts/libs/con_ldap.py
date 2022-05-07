@@ -117,9 +117,7 @@ def update_menu_tree_json(d, group_dn, upper_key=''):
 
 
 class AD(object):
-    def __init__(self, host, port, user, password, base_dn, ldap_server='openladp', use_ssl=False,
-                 ldap_user_object_class='inetOrgPerson',
-                 ldap_group_object_class='groupOfUniqueNames',):
+    def __init__(self, host, port, user, password, base_dn, ldap_server='openladp', use_ssl=False, ldap_user_object_class='inetOrgPerson', ldap_group_object_class='groupOfUniqueNames',):
         if ldap_server == 'windows_ad':
             authentication = NTLM
         else:
@@ -158,8 +156,7 @@ class AD(object):
         search_scope=SUBTREE (默认) 包含子树
         :return:
         """
-        self.conn.search(search_base='cn=运维部,cn=技术部,{}'.format(self.group_base),
-                         search_filter=self.group_search_filter, attributes=ALL_ATTRIBUTES, search_scope=BASE)
+        self.conn.search(search_base='cn=运维部,cn=技术部,{}'.format(self.group_base), search_filter=self.group_search_filter, attributes=ALL_ATTRIBUTES, search_scope=BASE)
         res = self.conn.response_to_json()
         res = json.loads(res)['entries']
         return res
@@ -202,8 +199,7 @@ class AD(object):
         """
         dn = 'cn={cn},{people_base}'.format(cn=cn, people_base=self.people_base)
         try:
-            self.conn.search(search_base=dn,
-                             search_filter=self.people_search_filter, attributes=ALL_ATTRIBUTES)
+            self.conn.search(search_base=dn, search_filter=self.people_search_filter, attributes=ALL_ATTRIBUTES)
             res = self.conn.response_to_json()
             res = json.loads(res)['entries'][0]['attributes']
             return True, res
@@ -486,7 +482,7 @@ class AD(object):
 
 
 if __name__ == '__main__':
-    ad = AD(host='', port=389, user='cn=Manager,dc=10dream,dc=com', password='', base_dn='dc=xxx,dc=com')
+    ad = AD(host='35.233.132.110', port=389, user='cn=Admin,dc=sayweee,dc=com', password='jSWOSDbji', base_dn='dc=sayweee,dc=com')
     # print(ad.get_group_list())
     # print(ad.search_group_user_list())
     # print(ad.search_user_info(cn='dengyong'))
@@ -510,6 +506,6 @@ if __name__ == '__main__':
     # ad.move_object('cn=曹兴,ou=Group,dc=10dream,dc=com','cn=曹兴,ou=People,dc=10dream,dc=com')
     # ad.update_group_name_or_upper('cn=运维部5,cn=技术部,ou=Group,dc=10dream,dc=com','cn=运维部,cn=产品中心,ou=Group,dc=10dream,dc=com')
     # print(ad.search_user_groups('曹兴'))
-    # print(ad.search_user_info('dengyong'))
+    print(ad.search_user_info('ldap_test'))
     # print(ad.check_password('dengyong', 'joycareer'))
-    print(ad.modify_password('cn=dengyong,ou=People,dc=10dream,dc=com', 'Joycareer123'))
+    # print(ad.modify_password('cn=ldap_test,ou=People,dc=sayweee,dc=com', '123456'))

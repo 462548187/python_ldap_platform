@@ -7,7 +7,7 @@ from django.conf import settings
 # # jenkins配置
 # import configparser
 # config = configparser.ConfigParser()
-# config.read('../../online.conf')
+# config.read('../../config.yml')
 # JENKINS_URL = config.get('jenkins', 'JENKINS_URL')
 # JENKINS_USERNAME = config.get('jenkins', 'JENKINS_USERNAME')
 # JENKINS_PASSWORD = config.get('jenkins', 'JENKINS_PASSWORD')

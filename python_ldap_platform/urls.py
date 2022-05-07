@@ -16,9 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from accounts.cas_view import ServiceValidateView
-from accounts.dintalk_view import ding_callback
-from dashboard.views import index, doc, test
+from home.views import index
 from accounts import views
 
 urlpatterns = [
@@ -30,17 +28,10 @@ urlpatterns = [
 
     # 基础url
     path('', index),
-    path('test/', test),
-    path('ding_callback/', ding_callback),
-    path('doc/<str:name>/', doc),
 
     # 自定义cas url
     path('login/', views.web_login, name='login'),
     path('logout/', views.web_logout, name='logout'),
     path('verify/', views.ticket_check, name='verify'),
     path('login_status/<str:web_tag>/<str:username>/<str:session_tag>/', views.login_status, name='login_status'),
-
-    # cas 这里只是实现部分简单的协议，可以满足django-cas-ng使用 v3 ；
-    # 接入配置可参考templates/doc/django_cas_ng_接入.md
-    path('p3/serviceValidate/', ServiceValidateView.as_view(), name='cas_p3_service_validate'),
 ]

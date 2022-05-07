@@ -25,6 +25,7 @@
                                 <th>管理用户</th>
                                 <th>使用SSL</th>
                                 <th>LDAP类型</th>
+                                <th>操作</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -38,14 +39,18 @@
                                     <td>{{ i.use_ssl }}</td>
                                     <td>{{ i.ldap_server }}</td>
 
-                                <td>
-                                    <a  title="管理" href="/accounts/ldapserver/detail/{{ i.id }}/"><i
+                                    <td>
+                                        <a title="管理" href="/accounts/ldapserver/detail/{{ i.id }}/"><i
                                                 data-feather="slack" class="icon-sm"> </i></a>
                                         &nbsp
 
-                                    <a title="删除" href="javascript:void(0);" onclick="object_delete('/accounts/ldapserver','{{ i.id }}')"><i
+                                        <a title="编辑" href="/accounts/ldapserver/update/{{ i.id }}/"><i
+                                                data-feather="edit" class="icon-sm"> </i></a>
+                                        &nbsp
+
+                                        <a title="删除" href="javascript:void(0);" onclick="object_delete('/accounts/ldapserver','{{ i.id }}')"><i
                                                 data-feather="x" class="icon-sm"> </i></a>
-                                     <!--
+                                        <!--
                                     <a class="hidden-button" title="管理" href="/accounts/ldapserver/detail/{{ i.id }}/"><i
                                                 data-feather="slack" class="icon-sm"> </i></a>
                                         &nbsp
@@ -57,7 +62,7 @@
                                         <a class="hidden-button" title="删除" href="javascript:void(0);" onclick="object_delete('/accounts/ldapserver','{{ i.id }}')"><i
                                                 data-feather="x" class="icon-sm"> </i></a>
                                                 -->
-                            </td>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>

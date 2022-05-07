@@ -1,5 +1,5 @@
 ### Django ###
-online.conf
+config.yml
 .DS_Store
 
 *.log

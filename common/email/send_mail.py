@@ -2,11 +2,10 @@ import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
 
-
-#阿里云企业邮箱相同主题和内容的邮件不能重复发送
+# 阿里云企业邮箱相同主题和内容的邮件不能重复发送
 # 发件人和收件人
 sender = 'hanyunfeng@10dream.com'
-receiver = 'hanyunfeng@newlink.com'
+receiver = '462548187@qq.com'
 
 # 所使用的用来发送邮件的SMTP服务器
 smtpserver = 'smtp.qiye.aliyun.com'
@@ -14,7 +13,6 @@ smtpserver = 'smtp.qiye.aliyun.com'
 # 发送邮箱的用户名和授权码（不是登录邮箱的密码）
 username = 'hanyunfeng@10dream.com'
 password = 'Joycareer123'
-
 
 # 邮件主题
 mail_title = '主题：测试报告345'
@@ -29,7 +27,7 @@ message['To'] = receiver
 message['Subject'] = Header(mail_title, 'utf-8')
 
 try:
-    #smtp = smtplib.SMTP(smtpserver, 465)
+    # smtp = smtplib.SMTP(smtpserver, 465)
     smtp = smtplib.SMTP_SSL(smtpserver, 465)
     smtp.login(username, password)
     smtp.sendmail(sender, receiver, message.as_string())

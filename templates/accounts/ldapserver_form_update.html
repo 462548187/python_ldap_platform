@@ -42,6 +42,7 @@
                             <label for="user">{{ form.user.label }}</label>
                             <input type="text" class="form-control" id="user" autocomplete="new-password"
                                    placeholder="" name="user" value="{{ form.user.value }}">
+                            <p style="color: gray;">从LDAP根节点搜索Manager。例如: cn=Manager,dc=domain,dc=com。</p>
                             <p>{% if form.user.errors %}{{ form.user.errors }}{% endif %}</p>
 
                         </div>
@@ -78,6 +79,7 @@
                             <label for="ldap_base_dn">{{ form.ldap_base_dn.label }}</label>
                             <input type="text" class="form-control" id="ldap_base_dn" autocomplete=""
                                    placeholder="" name="ldap_base_dn" value="{{ form.ldap_base_dn.value }}">
+                            <p style="color: gray;">从LDAP根节点搜索用户和组。例如: dc=domain,dc=com。</p>
                             <p>{% if form.ldap_base_dn.errors %}{{ form.ldap_base_dn.errors }}{% endif %}</p>
 
                         </div>
@@ -99,44 +101,43 @@
                         </div>
 
 
-                    <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-4">
                             <label for="ldap_user_dn">{{ form.ldap_user_dn.label }}</label>
                             <input type="text" class="form-control" id="ldap_user_dn" autocomplete=""
                                    placeholder="" name="ldap_user_dn" value="{{ form.ldap_user_dn.value }}">
-                    <p style="color: gray;">搜索用户时，基于基础DN的搜索范围限制。例如: ou=People。</p>
-                        <p>{% if form.ldap_user_dn.errors %}{{ form.ldap_user_dn.errors }}{% endif %}</p>
+                            <p style="color: gray;">搜索用户时，基于基础DN的搜索范围限制。例如: ou=People。</p>
+                            <p>{% if form.ldap_user_dn.errors %}{{ form.ldap_user_dn.errors }}{% endif %}</p>
 
                         </div>
 
-                    <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-4">
                             <label for="ldap_group_dn">{{ form.ldap_group_dn.label }}</label>
                             <input type="text" class="form-control" id="ldap_group_dn" autocomplete=""
                                    placeholder="" name="ldap_group_dn" value="{{ form.ldap_group_dn.value }}">
-                        <p style="color: gray;">搜索组时，基于基础DN的搜索范围限制。例如: ou=Group。</p>
-                        <p>{% if form.ldap_group_dn.errors %}{{ form.ldap_group_dn.errors }}{% endif %}</p>
+                            <p style="color: gray;">搜索组时，基于基础DN的搜索范围限制。例如: ou=Group。</p>
+                            <p>{% if form.ldap_group_dn.errors %}{{ form.ldap_group_dn.errors }}{% endif %}</p>
 
                         </div>
 
 
-
-                       <div class="form-group col-sm-4">
-									<label> {{ form.ldap_user_object_class.label }}</label>
-									<select class="js-example-basic-multiple w-100" name="ldap_user_object_class">
-                                        {% for i in form.ldap_user_object_class %}
-                                        {{ i }}
-                                        {% endfor %}
-									</select>
-                       <p style="color: gray;">加载用户时使用的LDAP用户对象类。例如: inetorgperson。</p>
+                        <div class="form-group col-sm-4">
+                            <label> {{ form.ldap_user_object_class.label }}</label>
+                            <select class="js-example-basic-multiple w-100" name="ldap_user_object_class">
+                                {% for i in form.ldap_user_object_class %}
+                                    {{ i }}
+                                {% endfor %}
+                            </select>
+                            <p style="color: gray;">加载用户时使用的LDAP用户对象类。例如: inetorgperson。</p>
                         </div>
 
-                    <div class="form-group col-sm-4">
-									<label> {{ form.ldap_group_object_class.label }}</label>
-									<select class="js-example-basic-multiple w-100" name="ldap_group_object_class">
-                                        {% for i in form.ldap_group_object_class %}
-                                        {{ i }}
-                                        {% endfor %}
-									</select>
-                       <p style="color: gray;">加载群组时要搜索的 LDAP 属性。例如: groupOfUniqueNames。</p>
+                        <div class="form-group col-sm-4">
+                            <label> {{ form.ldap_group_object_class.label }}</label>
+                            <select class="js-example-basic-multiple w-100" name="ldap_group_object_class">
+                                {% for i in form.ldap_group_object_class %}
+                                    {{ i }}
+                                {% endfor %}
+                            </select>
+                            <p style="color: gray;">加载群组时要搜索的 LDAP 属性。例如: groupOfUniqueNames。</p>
                         </div>
 
 

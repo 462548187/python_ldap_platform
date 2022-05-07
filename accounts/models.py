@@ -108,20 +108,18 @@ class LdapServer(models.Model):
     GROUP_OBJ = (
         ('groupOfUniqueNames', 'groupOfUniqueNames'),
     )
-    host = models.CharField(u"地址", max_length=40, unique=True, db_index=True)
+    host = models.CharField(u"地址", max_length=255, unique=True, db_index=True)
     port = models.IntegerField(u"端口", default=389)
-    user = models.CharField(u"管理用户", max_length=100)
-    password = models.CharField(u"管理密码", max_length=100)
+    user = models.CharField(u"管理用户", max_length=255)
+    password = models.CharField(u"管理密码", max_length=255)
     use_ssl = models.BooleanField(default=False)
     ldap_server = models.CharField(choices=LDAP_TYPE, verbose_name='ldap类型', max_length=30, default='openldap')
-    desc = models.CharField(u"描述", max_length=64, blank=True, null=True)
-    ldap_base_dn = models.CharField(u"基本DN", max_length=100, null=True, blank=True)
-    ldap_user_dn = models.CharField(u"附加用户DN", max_length=50, null=True, blank=True)
-    ldap_group_dn = models.CharField(u"附加组DN", max_length=50, null=True, blank=True)
-    ldap_user_object_class = models.CharField(u"用户对象类", choices=USER_OBJ, max_length=50, null=True, blank=True,
-                                              default='inetOrgPerson')
-    ldap_group_object_class = models.CharField(u"组对象类", choices=GROUP_OBJ, max_length=50, null=True, blank=True,
-                                               default='groupOfUniqueNames')
+    desc = models.CharField(u"描述", max_length=255, blank=True, null=True)
+    ldap_base_dn = models.CharField(u"基本DN", max_length=255, null=True, blank=True)
+    ldap_user_dn = models.CharField(u"附加用户DN", max_length=255, null=True, blank=True)
+    ldap_group_dn = models.CharField(u"附加组DN", max_length=255, null=True, blank=True)
+    ldap_user_object_class = models.CharField(u"用户对象类", choices=USER_OBJ, max_length=255, null=True, blank=True, default='inetOrgPerson')
+    ldap_group_object_class = models.CharField(u"组对象类", choices=GROUP_OBJ, max_length=255, null=True, blank=True, default='groupOfUniqueNames')
 
     def save(self, *args, **kwargs):
         self.password = rsa_encrypt(self.password)

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
 
 {% endblock %}
-{% block title %}测试{% endblock %}
+{% block title %}{{ this_object.desc }}-{{ this_object.ldap_server }}{% endblock %}
 {% block content %}
 
     <div class="row inbox-wrapper">
@@ -55,16 +55,16 @@
 
                                     </div>
                                     <div class="col-lg-6">
-                                        <!--
-                                        <div class="email-search">
-                                            <div class="input-group input-search">
-                                                <input id="search_user" class="form-control" type="text"
-                                                       placeholder="人员搜索"><span class="input-group-btn">
-                              <button onclick="search_user()" class="btn btn-outline-secondary" type="button"><i
-                                      data-feather="search"></i></button></span>
-                                            </div>
-                                        </div>
-                                        -->
+
+{#                                        <div class="email-search">#}
+{#                                            <div class="input-group input-search">#}
+{#                                                <input id="search_user" class="form-control" type="text"#}
+{#                                                       placeholder="人员搜索"><span class="input-group-btn">#}
+{#                              <button onclick="search_user()" class="btn btn-outline-secondary" type="button"><i#}
+{#                                      data-feather="search"></i></button></span>#}
+{#                                            </div>#}
+{#                                        </div>#}
+
                                     </div>
                                 </div>
                             </div>
@@ -234,7 +234,7 @@
                     }
                     $("#user_list").html(user_list);
                 });
-                */
+*/
 
         });
 
@@ -324,7 +324,7 @@
 
 
         /*
-        搜索用户需要输入准确用户，后台返回他的部门，然后定位树；定位用户；比较复杂，暂时不做了
+        搜索用户需要输入准确用户，后台返回他的部门，然后定位树；定位用户；比较复杂，暂时不做了 */
         function search_user() {
             //搜索用户，单击后面的按钮触发事件
             //找到当前用户属于哪个组 第一个组
@@ -335,7 +335,7 @@
 
 
         }
-        */
+
 
         $('#search_user').bind('keypress', function (event) {
             //搜索用户，input框直接回车触发事件

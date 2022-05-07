@@ -20,7 +20,6 @@ class LdapServerForm(forms.ModelForm):
         fields = '__all__'
 
 
-
 class UserForm(forms.ModelForm):
     class Meta:
         model = User

@@ -107,4 +107,3 @@ def change_password(request):
                 return render(request, template, {"error": {"message": '修改密码内部错误'}})
 
     return render(request, template, locals())
-

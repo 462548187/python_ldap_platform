@@ -23,10 +23,10 @@
                                 <th>#</th>
                                 <th>用户名</th>
                                 <th>邮箱</th>
-                               <!-- <th>手机</th> -->
+                                <th>手机</th>
                                 <th>角色</th>
                                 <th>状态</th>
-                                <th></th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -36,7 +36,7 @@
                                     <th>{{ i.id }}</th>
                                     <td>{{ i.username }}</td>
                                     <td>{{ i.email }}</td>
-                                    <!-- <td>{{ i.phone }}</td>-->
+                                    <td>{{ i.phone }}
 
                                     <td>
                                         {% for role in i.roles.all %}
@@ -44,11 +44,14 @@
                                         {% endfor %}
                                     </td>
                                     <td>
+                                        {% if i.is_active %}
+                                            <i data-feather="unlock" class="icon-sm"></i>
+                                        {% endif %}
                                         {% if not i.is_active or i.is_lock %}
                                             <i data-feather="lock" class="icon-sm"> </i>
                                         {% endif %}
                                         {% if i.is_superuser %}
-                                            <i data-feather="user-check" class="icon-sm"> </i>
+                                            <i data-feather="user-plus" class="icon-sm"> </i>
                                         {% endif %}
                                     </td>
                                      <td>

@@ -40,8 +40,8 @@
 
                         <div class="form-group col-sm-4">
                             <label for="user">{{ form.user.label }}</label>
-                            <input type="text" class="form-control" id="user" autocomplete="new-password"
-                                   placeholder="" name="user">
+                            <input type="text" class="form-control" id="user" autocomplete="new-password" placeholder="" name="user">
+                        <p style="color: gray;">从LDAP根节点搜索Manager。例如: cn=Manager,dc=domain,dc=com。</p>
                         <p>{% if form.user.errors %}{{ form.user.errors }}{% endif %}</p>
 
                         </div>
@@ -76,7 +76,7 @@
                             <label for="ldap_base_dn">{{ form.ldap_base_dn.label }}</label>
                             <input type="text" class="form-control" id="ldap_base_dn" autocomplete=""
                                    placeholder="" name="ldap_base_dn">
-                        <p style="color: gray;">从LDAP根节点搜索用户和组。例如: dc=10dream,dc=com。</p>
+                        <p style="color: gray;">从LDAP根节点搜索用户和组。例如: dc=domain,dc=com。</p>
                         <p>{% if form.ldap_base_dn.errors %}{{ form.ldap_base_dn.errors }}{% endif %}</p>
 
                         </div>

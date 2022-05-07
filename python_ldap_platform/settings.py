@@ -12,10 +12,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 import configparser
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 config = configparser.ConfigParser()
-config.read(os.path.join(BASE_DIR, 'online.conf'))
+config.read(os.path.join(BASE_DIR, 'config.yml'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
-    'dashboard.apps.DashboardConfig',
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,30 +80,29 @@ WSGI_APPLICATION = 'python_ldap_platform.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# 使用mysql数据库
-# DB_HOST = config.get('db', 'host')
-# DB_PORT = config.getint('db', 'port')
-# DB_USER = config.get('db', 'user')
-# DB_PASSWORD = config.get('db', 'password')
-# DB_DATABASE = config.get('db', 'database')
 # DATABASES = {
 #     'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'NAME': DB_DATABASE,
-#             'USER': DB_USER,
-#             'PASSWORD': DB_PASSWORD,
-#             'HOST': DB_HOST,
-#             'PORT': DB_PORT,
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
+# 使用mysql数据库
+DB_HOST = config.get('db', 'host')
+DB_PORT = config.getint('db', 'port')
+DB_USER = config.get('db', 'user')
+DB_PASSWORD = config.get('db', 'password')
+DB_DATABASE = config.get('db', 'database')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': DB_DATABASE,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -128,9 +128,9 @@ LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
-#LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
 
-#TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -148,8 +148,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
-
 
 LOGGING = {
     'version': 1,
@@ -234,7 +232,6 @@ LOGGING = {
 
 AUTH_USER_MODEL = 'accounts.User'
 
-
 LOGIN_URL = "/login"
 _LOGIN_URL = "/login"
 _DEFAULT_FORWARD = '/'
@@ -244,19 +241,16 @@ _TIME_OUT = 9000
 _REDIS_HOST = config.get('redis', 'host')
 _REDIS_PORT = config.get('redis', 'port')
 
-
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config.get('email', 'EMAIL_HOST')
 EMAIL_PORT = config.get('email', 'EMAIL_PORT')
 EMAIL_USE_SSL = config.get('email', 'EMAIL_USE_SSL')
-#发送邮件的邮箱
+# 发送邮件的邮箱
 EMAIL_HOST_USER = config.get('email', 'EMAIL_HOST_USER')
-#在邮箱中设置的客户端授权密码
+# 在邮箱中设置的客户端授权密码
 EMAIL_HOST_PASSWORD = config.get('email', 'EMAIL_HOST_PASSWORD')
-#收件人看到的发件人
+# 收件人看到的发件人
 EMAIL_FROM = config.get('email', 'EMAIL_FROM')
-
 
 PUBKEY = """
 -----BEGIN RSA PUBLIC KEY-----
@@ -294,27 +288,7 @@ JENKINS_URL = config.get('jenkins', 'JENKINS_URL')
 JENKINS_USERNAME = config.get('jenkins', 'JENKINS_USERNAME')
 JENKINS_PASSWORD = config.get('jenkins', 'JENKINS_PASSWORD')
 
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-# Yearning配置
-Y_HOST = config.get('yearning', 'host')
-Y_PORT = config.getint('yearning', 'port')
-Y_USER = config.get('yearning', 'user')
-Y_PASSWORD = config.get('yearning', 'password')
-Y_DATABASE = config.get('yearning', 'database')
-
-
-# aly配置
-ACCESS_ID = config.get('aliyun', 'access_id')
-ACCESS_KEY = config.get('aliyun', 'access_key')
-ACCOUNT_MAIL = config.get('aliyun', 'accout_mail')
-
-
-
-
-
-
-
-
-
-
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -49,26 +49,26 @@ class Plugin(dict):
     '''Dictionary object containing plugin metadata.'''
 
     def __init__(self, *args, **kwargs):
-        '''Populates dictionary using json object input.
+        """Populates dictionary using json object input.
 
         accepts same arguments as python `dict` class.
-        '''
+        """
         version = kwargs.pop('version', None)
 
         super(Plugin, self).__init__(*args, **kwargs)
         self['version'] = version
 
     def __setitem__(self, key, value):
-        '''Overrides default setter to ensure that the version key is always
+        """Overrides default setter to ensure that the version key is always
         a PluginVersion class to abstract and simplify version comparisons
-        '''
+        """
         if key == 'version':
             value = PluginVersion(value)
         super(Plugin, self).__setitem__(key, value)
 
 
 class PluginVersion(str):
-    '''Class providing comparison capabilities for plugin versions.'''
+    """Class providing comparison capabilities for plugin versions."""
 
     _VERSION_RE = re.compile(r'(.*)-(?:SNAPSHOT|BETA)')
 

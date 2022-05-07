@@ -44,7 +44,7 @@
 
                                     {% for i in l_s %}
                                     <div id="ldap_{{ i.id }}" class="container tab-pane active "><br>
-                                        <form class="forms-sample" method="post">
+                                        <form class="forms-sample" method="post">{% csrf_token %}
                                             <input name="ldapserver_id" value="{{ i.id }}" hidden="hidden">
                                             <div class="form-group">
                                                 <label>LDAP Username</label>

@@ -297,35 +297,6 @@ class IsAdminMixin(View):
             return super().dispatch(request, *args, **kwargs)
 
 
-def send_ali_password(username, nickname, email, password):
-    email_content_template = '<html><body>{nickname}, 您好：' \
-                             '<br>我们为您开通了阿里云子账号!' \
-                             '<br><br>用户名: {username}{account_mail}' \
-                             '<br>密码: {password}' \
-                             '<br><br>当您第一次登陆的时候，我们会要求您重置密码' \
-                             '<br><br>Thanks,<br>The Ops Team<body></html>'
-    subject = '[运维通知] 阿里云子账号开通提醒'
-    sender = settings.EMAIL_FROM  # 发送邮箱，已经在settings.py设置，直接导入
-    receiver = [email]  # 目标邮箱
-    html_message = email_content_template.format(username=username, nickname=nickname, password=password,
-                                                 account_mail=settings.ACCOUNT_MAIL)  # 发送html格式
-
-    try:
-        print(subject)
-        print(sender, receiver)
-        send_result = send_mail(subject=subject, from_email=sender, html_message=html_message, recipient_list=receiver,
-                                message='')
-        print(send_result)
-        if send_result == 1:
-            # 提示邮件已发送，并跳转到登录页面
-            return True
-        else:
-            return False
-    except Exception as e:
-        logger.error(e)
-        return False
-
-
 def send_ldap_password(username, nickname, email, password):
     email_content_template = '<html><body>{nickname}, 您好：' \
                              '<br>我们为您开通了统一账号' \
@@ -337,8 +308,7 @@ def send_ldap_password(username, nickname, email, password):
     subject = '[运维通知] 统一账号开通提醒'
     sender = settings.EMAIL_FROM  # 发送邮箱，已经在settings.py设置，直接导入
     receiver = [email]  # 目标邮箱
-    html_message = email_content_template.format(username=username, nickname=nickname, password=password,
-                                                 sso_address=settings.DOMAIN_NAME)  # 发送html格式
+    html_message = email_content_template.format(username=username, nickname=nickname, password=password, sso_address=settings.DOMAIN_NAME)  # 发送html格式
 
     try:
         print(subject)

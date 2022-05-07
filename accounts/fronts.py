@@ -6,13 +6,10 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.generic import CreateView, UpdateView, ListView
 
 from accounts.forms import RoleForm, UserForm, DomainuthorizedListForm, LdapServerForm
-from accounts.libs.ali import AliRam
-from accounts.libs.common import IsAdminMixin, send_ali_password
+from accounts.libs.common import IsAdminMixin
 from accounts.libs.con_jenkins import JenkinsApi
-from accounts.libs.yearning_db import yearning_op_add, yearning_op_del
 from accounts.models import User, DomainuthorizedList, Role, WebAuthorizationRecord, LdapServer, UserLoginInfo
-from common.lib import random_str
-from python_ldap_platform.settings import EXT_PER, ACCESS_ID, ACCESS_KEY
+from python_ldap_platform.settings import EXT_PER
 
 
 class UserListView(LoginRequiredMixin, IsAdminMixin, ListView):
@@ -121,20 +118,6 @@ def add_permissions(pers, username, nickname, email):
             jks = JenkinsApi()
             jks.assign_role('globalRoles', 'READ', username)
             jks.assign_role('projectRoles', '开发环境', username)
-        elif j == 'yearning':
-            yearning_op_add(username, nickname, email)
-        elif j == 'aliyun-backend-dev':
-            # 新建用户
-            ar = AliRam(access_id=ACCESS_ID, access_key=ACCESS_KEY)
-            ar.create_user(username, nickname, email)
-            # 开通登陆权限
-            _password = random_str(20)
-            result = ar.login_profile(username, _password)
-            if result['status']:
-                # 发送密码邮件
-                send_ali_password(username, nickname, email, _password)
-            # 添加到开发组
-            ar.add_user_to_group(username)
         else:
             pass
 
@@ -147,14 +130,6 @@ def remove_permissions(pers, username):
         elif j == 'jenkins_dev':
             jks = JenkinsApi()
             jks.unassign_role('projectRoles', '开发环境', username)
-        elif j == 'yearning':
-            yearning_op_del(username)
-        elif j == 'aliyun-backend-dev':
-            ar = AliRam(access_id=ACCESS_ID, access_key=ACCESS_KEY)
-            # 移除登陆界面权限
-            ar.delete_login_profile(username)
-            # 移除组
-            ar.remove_user_from_group(username)
         else:
             pass
 
@@ -164,20 +139,6 @@ def remove_all_ext_permissions_and_local_user(username):
         jks = JenkinsApi()
         jks.delete_sid('globalRoles', username)
         jks.delete_sid('projectRoles', username)
-    except Exception as e:
-        pass
-
-    try:
-        yearning_op_del(username)
-    except Exception as e:
-        pass
-
-    try:
-        ar = AliRam(access_id=ACCESS_ID, access_key=ACCESS_KEY)
-        # 移除登陆界面权限
-        ar.delete_login_profile(username)
-        # 移除组
-        ar.remove_user_from_group(username)
     except Exception as e:
         pass
 

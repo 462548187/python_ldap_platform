@@ -26,8 +26,7 @@ def ad_instance(pk):
         l_s = LdapServer.objects.get(pk=pk)
         ldap_group_dn = "{group_dn},{base_dn}".format(group_dn=l_s.ldap_group_dn, base_dn=l_s.ldap_base_dn)
         ldap_user_dn = "{user_dn},{base_dn}".format(user_dn=l_s.ldap_user_dn, base_dn=l_s.ldap_base_dn)
-        return AD(host=l_s.host, port=l_s.port, user=l_s.user,
-                  password=rsa_decrypt(l_s.password), base_dn=l_s.ldap_base_dn,
+        return AD(host=l_s.host, port=l_s.port, user=l_s.user, password=rsa_decrypt(l_s.password), base_dn=l_s.ldap_base_dn,
                   ldap_user_object_class=l_s.ldap_user_object_class,
                   ldap_group_object_class=l_s.ldap_group_object_class), ldap_group_dn, ldap_user_dn
     except Exception as e:
@@ -175,7 +174,7 @@ def ldap_user_add(request, pk, user_parent_dn):
             logger.error(e)
         # 发送邮件的密码
         send_ldap_password(username=cn, nickname=display_name, email=mail, password=new_password)
-        return JsonResponse({'status': 0, 'pwd':new_password})
+        return JsonResponse({'status': 0, 'pwd': new_password})
     return render(request, 'ldap/ldap_user_add.html', locals())
 
 
@@ -301,7 +300,6 @@ def ldap_user_delete(request, pk, cn):
         return JsonResponse({'status': 1})
 
 
-
 @login_required
 def ldap_user_reset_password(request, pk, cn):
     ad, ldap_group_dn, ldap_user_dn = ad_instance(pk)
@@ -357,10 +355,7 @@ def send_forget_password_email(request, pk):
             return render(request, template, {"error": {"message": '输入邮箱有误'}})
         # 生成随机验证串，邮箱，当前时间，dn ，一并存入数据库中
         token = random_str()
-        LdapUserEmailVerifyRecord.objects.create(ldap_server_id=pk,
-                                                 dn=this_dn,
-                                                 token=token,
-                                                 email=email)
+        LdapUserEmailVerifyRecord.objects.create(ldap_server_id=pk, dn=this_dn, token=token, email=email)
         # 发邮件，包含验证串
         # 发送邮件功能-------------
         subject = '[{}] Please reset your password'.format(settings.SITE_NAME)  # 主题
@@ -369,11 +364,9 @@ def send_forget_password_email(request, pk):
         html_message = email_content_template.format(token=token, domain=settings.DOMAIN_NAME)  # 发送html格式
         print(html_message)
         try:
-            print(subject)
-            print(sender,receiver)
-            send_result = send_mail(subject=subject, from_email=sender, html_message=html_message, recipient_list=receiver,
-                                    message='')
-            print(send_result)
+            print("邮箱主题:", subject)
+            print("发件人：{}, 收件人：{}".format(sender, receiver))
+            send_result = send_mail(subject=subject, from_email=sender, html_message=html_message, recipient_list=receiver, message='')
             if send_result == 1:
                 # 提示邮件已发送，并跳转到登录页面
                 return redirect("page_wait", content='密码重置邮件已经发送')
