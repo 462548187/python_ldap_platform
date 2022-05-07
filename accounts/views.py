@@ -24,17 +24,6 @@ def web_login(request):
     template = 'accounts/login.html'
     error = ''
     service, domain = get_service(request)
-    # 增加针对域名进行授权的功能
-    # 如果为None 表示当前登录为本地登录
-    if domain is not None:
-        try:
-            domain_count = DomainuthorizedList.objects.filter(domain_name=domain).count()
-        except Exception as e:
-            domain_count = 0
-        if domain_count == 0:
-            error = "当前网站不在授权列表内，请联系管理员"
-            return render(request, template, locals())
-    # 增加针对域名进行授权的功能 结束
     if request.user.is_authenticated:
         return login_redirect(request, service, domain, request.user.username)
     if request.method == 'POST':
@@ -103,8 +92,6 @@ def login_status(request, web_tag, username, session_tag):
     """
     try:
         user = get_user_model().objects.get(username=username)
-        domain = DomainuthorizedList.objects.get(mark=web_tag)
-        WebAuthorizationRecord.objects.create(user=user, tag=session_tag, domain=domain)
         status = 0
     except Exception as e:
         logger.error(e)
@@ -125,12 +112,4 @@ def web_logout(request):
     if request.user.is_authenticated:
         user = request.user
         logout_user(request)
-        # 统一退出客户机
-        for i in WebAuthorizationRecord.objects.filter(user=user, status=1):
-            try:
-                requests.get(os.path.join(i.domain.logout_api_url, i.tag), timeout=5)
-                i.status = 0
-                i.save()
-            except Exception as e:
-                logger.error(e)
     return HttpResponseRedirect(service)
