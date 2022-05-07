@@ -283,10 +283,6 @@ SITE_NAME = config.get('base', 'SITE_NAME')
 DOMAIN_SUFFIX = config.get('ldap', 'DOMAIN_SUFFIX')
 EXT_PER = config.get('base', 'external_permission')
 
-# jenkins配置
-JENKINS_URL = config.get('jenkins', 'JENKINS_URL')
-JENKINS_USERNAME = config.get('jenkins', 'JENKINS_USERNAME')
-JENKINS_PASSWORD = config.get('jenkins', 'JENKINS_PASSWORD')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

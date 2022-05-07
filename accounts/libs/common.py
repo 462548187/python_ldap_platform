@@ -289,14 +289,6 @@ def get_or_none(model, *args, **kwargs):
         return None
 
 
-class IsAdminMixin(View):
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_superuser:
-            return redirect("page_wait", content='您没有此页面权限')
-        else:
-            return super().dispatch(request, *args, **kwargs)
-
-
 def send_ldap_password(username, nickname, email, password):
     email_content_template = '<html><body>{nickname}, 您好：' \
                              '<br>我们为您开通了统一账号' \

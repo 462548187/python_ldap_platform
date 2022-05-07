@@ -9,9 +9,8 @@ from django.contrib.auth import logout, get_user_model
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
-from accounts.libs.common import get_service, login_redirect, auth, get_user_by_ticket, get_referer_service, \
-    cache_logout_user, ldap_auth
-from accounts.models import WebAuthorizationRecord, DomainuthorizedList, LdapServer
+from accounts.libs.common import get_service, login_redirect, auth, get_user_by_ticket, get_referer_service, cache_logout_user, ldap_auth
+from accounts.models import LdapServer
 
 logger = logging.getLogger('sso')
 

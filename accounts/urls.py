@@ -1,7 +1,6 @@
 from django.urls import path
 
-from accounts.fronts import UserListView, RoleListView, LdapServerListView, role_delete, RoleCreateView, RoleUpdateView, \
-    UserUpdateView, UserCreateView, user_delete, LdapServerCreateView, ldapserver_delete, LdapServerUpdateView, \
+from accounts.fronts import UserListView, LdapServerListView, UserUpdateView, UserCreateView, user_delete, LdapServerCreateView, ldapserver_delete, LdapServerUpdateView, \
     ldapserver_detail, ldap_user_add_to_local
 from accounts.ldap_view import ldap_tree, ldap_all_user, ldap_group_user, ldap_group_edit, ldap_group_form_tree, \
     ldap_group_add, ldap_user_add, ldap_user_form_tree, ldap_user_edit, ldap_user_delete, send_forget_password_email, \
@@ -13,11 +12,6 @@ urlpatterns = [
     path('ldapserver/delete/<int:pk>/', ldapserver_delete, name='ldapserver_delete'),
     path('ldapserver/update/<int:pk>/', LdapServerUpdateView.as_view(), name='ldapserver_update'),
     path('ldapserver/detail/<int:pk>/', ldapserver_detail, name='ldapserver_detail'),
-
-    path('role/list/', RoleListView.as_view(), name='role_list'),
-    path('role/delete/<int:pk>/', role_delete, name='role_delete'),
-    path('role/add/', RoleCreateView.as_view(), name='role_add'),
-    path('role/update/<int:pk>/', RoleUpdateView.as_view(), name='role_update'),
 
     path('user/list/', UserListView.as_view(), name='user_list'),
     path('user/delete/<int:pk>/', user_delete, name='user_delete'),

@@ -57,33 +57,10 @@
                                 <a href="/accounts/ldapserver/list/"
                                    class="nav-link {% if '/accounts/ldapserver/' in  request.path %}active{% endif %}">LDAP用户</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="/accounts/role/list/"
-                                   class="nav-link {% if '/accounts/role/' in  request.path %}active{% endif %}">角色</a>
-                            </li>
                         </ul>
                     </div>
                 </li>
-                <li class="parent-menu nav-item {% if '/website/' in  request.path %}active{% endif %}">
-                    <a class="nav-link" data-toggle="collapse" href="#website" role="button" aria-expanded="false"
-                       aria-controls="users">
-                        <i class="link-icon" data-feather="user"></i>
-                        <span class="link-title">权限管理</span>
-                        <i class="link-arrow" data-feather="chevron-down"></i>
-                    </a>
-                    <div class="child-group collapse {% if '/website/' in  request.path %}show{% endif %}" id="website">
-                        <ul class="nav sub-menu">
-                            <li class="nav-item">
-                                <a href="/website/domainthorized/list/"
-                                   class="nav-link {% if '/website/domainthorized/' in  request.path %}active{% endif %}">授权</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/website/webrecord/list/"
-                                   class="nav-link {% if '/website/webrecord/' in  request.path %}active{% endif %}">登录日志</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+
             {% endif %}
         </ul>
     </div>

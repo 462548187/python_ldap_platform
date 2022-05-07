@@ -8,8 +8,6 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.clickjacking import xframe_options_exempt
-
-from accounts.fronts import remove_all_ext_permissions_and_local_user
 from accounts.libs.common import send_ldap_password
 from accounts.libs.con_ldap import AD, group_dn_magic, group_dn_magic_re
 from accounts.models import LdapUserEmailVerifyRecord, LdapServer

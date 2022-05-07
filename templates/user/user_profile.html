@@ -48,15 +48,6 @@
                         <label class="tx-11 font-weight-bold mb-0 text-uppercase">是否管理员:</label>
                         <p class="text-muted">{% if request.user.is_superuser %} 是 {% else %} 否 {% endif %}</p>
                     </div>
-                    <div class="mt-3">
-                        <label class="tx-11 font-weight-bold mb-0 text-uppercase">拥有的所有角色:</label>
-                        <p class="text-muted">
-                            {% for i in request.user.roles.all %}
-                                <span class="badge badge-primary">{{ i.title }}</span>
-                            {% endfor %}
-                        </p>
-                    </div>
-
 
                 </div>
             </div>

@@ -55,16 +55,16 @@
 
                                     </div>
                                     <div class="col-lg-6">
-
-{#                                        <div class="email-search">#}
-{#                                            <div class="input-group input-search">#}
-{#                                                <input id="search_user" class="form-control" type="text"#}
-{#                                                       placeholder="人员搜索"><span class="input-group-btn">#}
-{#                              <button onclick="search_user()" class="btn btn-outline-secondary" type="button"><i#}
-{#                                      data-feather="search"></i></button></span>#}
-{#                                            </div>#}
-{#                                        </div>#}
-
+                                        <!--
+                                        <div class="email-search">
+                                            <div class="input-group input-search">
+                                                <input id="search_user" class="form-control" type="text"
+                                                       placeholder="人员搜索"><span class="input-group-btn">
+                              <button onclick="search_user()" class="btn btn-outline-secondary" type="button"><i
+                                      data-feather="search"></i></button></span>
+                                            </div>
+                                        </div>
+                                        -->
                                     </div>
                                 </div>
                             </div>
@@ -111,9 +111,22 @@
             order: [[2, "desc"]],
             columnDefs: [
                 {
+                    targets: 4,
+                    data: "edit",
+                    title: "操作",
+                    render: function (data, type, row, meta) {
+                        if ('edit' in row.attributes) {
+                            return row.attributes.edit
+                        } else {
+                            return '编辑<icon-edit> </i>'
+                        }
+                    }
+
+                },
+                {
                     targets: 3,
                     data: "telephoneNumber",
-                    title: "telephoneNumber",
+                    title: "手机号码",
                     render: function (data, type, row, meta) {
                         if ('telephoneNumber' in row.attributes) {
                             return row.attributes.telephoneNumber
@@ -124,7 +137,7 @@
                 }, {
                     targets: 2,
                     data: "mail",
-                    title: "mail",
+                    title: "邮箱",
                     render: function (data, type, row, meta) {
                         if ('mail' in row.attributes) {
                             return row.attributes.mail
@@ -135,7 +148,7 @@
                 }, {
                     targets: 1,
                     data: "displayName",
-                    title: "displayName",
+                    title: "全名",
                     render: function (data, type, row, meta) {
                         if ('displayName' in row.attributes) {
                             return row.attributes.displayName
@@ -234,7 +247,7 @@
                     }
                     $("#user_list").html(user_list);
                 });
-*/
+                */
 
         });
 
@@ -324,7 +337,7 @@
 
 
         /*
-        搜索用户需要输入准确用户，后台返回他的部门，然后定位树；定位用户；比较复杂，暂时不做了 */
+        搜索用户需要输入准确用户，后台返回他的部门，然后定位树；定位用户；比较复杂，暂时不做了
         function search_user() {
             //搜索用户，单击后面的按钮触发事件
             //找到当前用户属于哪个组 第一个组
@@ -335,7 +348,7 @@
 
 
         }
-
+        */
 
         $('#search_user').bind('keypress', function (event) {
             //搜索用户，input框直接回车触发事件

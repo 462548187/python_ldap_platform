@@ -23,7 +23,7 @@ urlpatterns = [
     # 引入urls
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('website/', include('accounts.urls2')),
+    # path('website/', include('accounts.urls2')),
     path('personal/', include('accounts.urls3')),
 
     # 基础url
