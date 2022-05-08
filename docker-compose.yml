@@ -6,12 +6,12 @@ services:
       dockerfile: Dockerfile
     container_name: python_ldap_platform
     ports:
-      - "8908:8908"
+      - "8000:8000"
     restart: always
-#    volumes:
-#      - /opt/python_ldap_platform/logs:/code/logs/
-#      - /opt/python_ldap_platform/python_ldap_platform:/code/python_ldap_platform/
-#      - /opt/python_ldap_platform/config.yml:/code/python_ldap_platform/config.yml
+    volumes:
+      - /opt/python_ldap_platform/logs:/code/logs/
+      - /opt/python_ldap_platform/python_ldap_platform:/code/python_ldap_platform/
+      - /opt/python_ldap_platform/config.yml:/code/python_ldap_platform/config.yml
     environment:
       - TZ=Asia/Shanghai
 ###### 以下注释项为可选变量

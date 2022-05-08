@@ -8,7 +8,7 @@ from django.conf import settings
 
 class cacheRedis:
     def __init__(self):
-        self.con = redis.Redis(host=settings._REDIS_HOST, port=settings._REDIS_PORT, decode_responses=True)
+        self.con = redis.Redis(host=settings._REDIS_HOST, port=settings._REDIS_PORT, password = settings._REDIS_PASSWORD ,decode_responses=True)
 
     def setTicket(self, timeout, **kwargs):
         ticket = str(kwargs.get("ticket"))

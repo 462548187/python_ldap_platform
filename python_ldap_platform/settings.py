@@ -240,6 +240,7 @@ _TIME_OUT = 9000
 
 _REDIS_HOST = config.get('redis', 'host')
 _REDIS_PORT = config.get('redis', 'port')
+_REDIS_PASSWORD = config.get('redis', 'password')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config.get('email', 'EMAIL_HOST')
