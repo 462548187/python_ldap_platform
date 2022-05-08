@@ -11,7 +11,7 @@ services:
     volumes:
       - /opt/python_ldap_platform/logs:/code/logs/
       - /opt/python_ldap_platform/python_ldap_platform:/code/python_ldap_platform/
-      - /opt/python_ldap_platform/config.yml:/code/config.yml
+      - /opt/python_ldap_platform/conf.yml:/code/conf.yml
     environment:
       - TZ=Asia/Shanghai
 ###### 以下注释项为可选变量
