@@ -1,5 +1,5 @@
 ## Python版本
-FROM python:3.9.12
+FROM python:3.10.0
 
 # 创建工作目录
 RUN mkdir -p /code
@@ -15,4 +15,6 @@ ADD . /code
 RUN pip install -r /code/requirements.txt
 
 # 运行服务
+CMD ["python", "manage.py", "makemigrations"]
+CMD ["python", "manage.py", "migrate"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
