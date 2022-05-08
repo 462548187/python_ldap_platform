@@ -9,7 +9,7 @@ services:
       - "8000:8000"
     restart: always
     volumes:
-      - /opt/python_ldap_platform/logs:logs/
+      - /opt/python_ldap_platform/logs:/logs/
       - /opt/python_ldap_platform/python_ldap_platform:/python_ldap_platform/
       - /opt/python_ldap_platform/config.yml:config.yml
     environment:
