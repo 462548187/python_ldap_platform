@@ -1,0 +1,29 @@
+[base]
+DOMAIN_NAME = http://35.233.132.110:8000/
+SITE_NAME = LDAP管理系统
+external_permission = no
+
+[db]
+engine = mysql
+host = 35.233.132.110
+port = 3307
+user = root
+password = Password123@mysql
+database = ldap_platform
+
+[redis]
+host = 35.233.132.110
+port = 6379
+password = Password123@redis
+
+[email]
+EMAIL_HOST = smtp.qq.com
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 462548187@qq.com
+EMAIL_HOST_PASSWORD = gvdvlfkbjmxobgcf
+EMAIL_FROM = 462548187@qq.com
+
+[ldap]
+DOMAIN_SUFFIX = sayweee.com
+

@@ -1,5 +1,5 @@
 ## Python版本
-FROM python:3.9.12
+FROM python:3.10.0
 
 # 创建工作目录
 RUN mkdir -p /code
