@@ -305,8 +305,7 @@ def send_ldap_password(username, nickname, email, password):
     try:
         print(subject)
         print(sender, receiver)
-        send_result = send_mail(subject=subject, from_email=sender, html_message=html_message, recipient_list=receiver,
-                                message='')
+        send_result = send_mail(subject=subject, from_email=sender, html_message=html_message, recipient_list=receiver, message='')
         print(send_result)
         if send_result == 1:
             # 提示邮件已发送，并跳转到登录页面

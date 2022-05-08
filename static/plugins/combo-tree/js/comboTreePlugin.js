@@ -110,7 +110,7 @@
   };
 
   ComboTree.prototype.createFilterHTMLForMultiSelect = function (){
-    return '<input id="' + this.comboTreeId + 'MultiFilter" type="text" class="multiplesFilter" placeholder="Type to filter"/>';
+    return '<input id="' + this.comboTreeId + 'MultiFilter" type="text" class="multiplesFilter" placeholder="请选择部门，支持单选和多选"/>';
   }
 
   ComboTree.prototype.createSourceSubItemsHTML = function (subItems, parentId) {

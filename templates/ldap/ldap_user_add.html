@@ -23,7 +23,7 @@
                             <label><span  style="color: red;">*</span>CN：</label>
                             <input type="text" id="cn" class="form-control  col-md-4" id=""
                                    autocomplete="off" placeholder="如：zhangsan" value="" >
-                            <span style="color: #e8ebf1;">建议和邮箱前缀一致，同名用户可以自定义英文全拼</span>
+                            <span style="color: #adb0b4;">建议和邮箱前缀一致，同名用户可以自定义英文全拼</span>
                         </div>
 
                         <div class="form-group">
@@ -39,14 +39,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>中文名：</label>
+                            <label><span  style="color: red;">*</span>中文名：</label>
                             <input type="text" id="display_name" class="form-control  col-md-4" id=""
                                    autocomplete="off" placeholder="如：张三" value="" >
                         </div>
 
 
                         <div class="form-group">
-                            <label>电话：</label>
+                            <label><span  style="color: red;">*</span>电话：</label>
                             <input type="text" id="phone" class="form-control col-md-6" id="" autocomplete="off"
                                    placeholder="11位手机号" data-inputmask-alias="19999999999" value="">
                         </div>
@@ -132,7 +132,8 @@
                 return
             }
             if (phone === ''){
-                phone = '1'
+                layer.msg('必须11位数字', {icon: 2});
+                return
             }
             $.ajax({
                     url: '/accounts/ldap/ldap_user_add/{{ pk }}/{{ user_parent_dn }}/',
@@ -149,9 +150,9 @@
                     success: function (data) {
                         if (data.status === 0) {
                             // 提示密码
-                            // layer.confirm('密码为：'+data['pwd']+'</br><div style="color:red">请确保妥善保存此密码,您无法再次查询此密码</div>', {
-                            layer.confirm('ldap用户创建成功，密码已通过邮件发送', {
-                                btn: ['继续角色配置', '结束'],
+                            //layer.confirm('密码为：'+data['pwd']+'</br><div style="color:red">请确保妥善保存此密码,您无法再次查询此密码</div>', {
+                            layer.confirm('ldap用户创建成功,密码为：'+data["pwd"]+'</br><div style="color:red">请妥善保存此密码，</br>为防止再次需要该密码，已通过邮件发送到注册邮箱，请注意查收。</div>', {
+                                btn: ['完成'],
                                 title: false,
                                 closeBtn: false,
                             }, function () {
@@ -170,7 +171,7 @@
                                             if (data.status === 0) {
                                                 var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
                                                 parent.layer.close(index);
-                                                window.parent.location.replace("/accounts/user/update/"+data.aid);
+                                                parent.location.reload();
                                             }
                                         },
                                         error: function (data) {

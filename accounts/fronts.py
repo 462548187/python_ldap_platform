@@ -6,14 +6,14 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.generic import CreateView, UpdateView, ListView
 
 from accounts.forms import UserForm, LdapServerForm
-from accounts.models import User,   LdapServer, UserLoginInfo
+from accounts.models import User, LdapServer, UserLoginInfo
 
 
-class UserListView(LoginRequiredMixin,  ListView):
+class UserListView(LoginRequiredMixin, ListView):
     model = User
 
 
-class LdapServerListView(LoginRequiredMixin,  ListView):
+class LdapServerListView(LoginRequiredMixin, ListView):
     model = LdapServer
 
 
@@ -34,7 +34,6 @@ class LdapServerUpdateView(LoginRequiredMixin, UpdateView):
 def ldapserver_detail(request, pk):
     this_object = LdapServer.objects.get(pk=pk)
     return render(request, 'accounts/ldapserver_detail.html', locals())
-
 
 
 @login_required
@@ -64,6 +63,15 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'accounts/user_form_update.html'
 
 
+def remove_all_ext_permissions_and_local_user(username):
+    try:
+        sg = User.objects.get(username=username)
+        UserLoginInfo.objects.filter(user=sg).delete()
+        sg.delete()
+    except Exception as e:
+        pass
+
+
 @login_required
 def ldapserver_delete(request, pk):
     status = 1
@@ -88,7 +96,7 @@ def ldap_user_add_to_local(request):
         cn = request.POST['cn']
         email = "{email_prefix}@{email_suffix}".format(email_prefix=email_prefix, email_suffix=email_suffix)
         try:
-            result,b = User.objects.get_or_create(username=cn, email=email, nickname=display_name)
+            result, b = User.objects.get_or_create(username=cn, email=email, nickname=display_name)
             aid = result.id
             status = 0
         except Exception as e:

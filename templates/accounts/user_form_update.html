@@ -51,14 +51,6 @@
 
                         </div>
 
-                        <div class="form-group">
-									<label> {{ form.roles.label }}</label>
-									<select class="js-example-basic-multiple w-100" multiple="multiple" name="roles">
-                                        {% for i in form.roles %}
-                                        {{ i }}
-                                        {% endfor %}
-									</select>
-                        </div>
                         <div class="form-check form-check-flat form-check-primary">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="is_lock" {% if form.is_lock.value  %}checked="checked" {% endif %}>
