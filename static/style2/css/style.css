@@ -8930,6 +8930,11 @@ textarea.tt-hint {
 .form-group {
   margin-bottom: 1rem; }
 
+.form-group .forget-password{
+  text-align: right;
+}
+
+
 .form-text {
   display: block;
   margin-top: 0.25rem; }

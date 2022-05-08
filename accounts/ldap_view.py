@@ -323,11 +323,11 @@ def send_forget_password_email(request, pk):
     error = ''
     template = 'ldap/send_forget_password_email.html'
 
-    email_content_template = '<html><body>We heard that you lost your ops password. Sorry about that!' \
-                             '<br><br>But don’t worry! You can use the following link to reset your password:' \
+    email_content_template = '<html><body>我们听说您LDAP密码已丢失，深表歉意' \
+                             '<br><br>但不用担心，您可以使用以下链接重置密码:' \
                              '<br><br>{domain}/accounts/ldap/email_reset_password/{token}' \
-                             '<br><br>If you don’t use this link within 1 hours, it will expire. To get a new password reset link' \
-                             '<br><br>Thanks,<br>The Ops Team<body></html>'
+                             '<br><br>该链接有效期为1小时，请您尽快操作，以免链接失效。' \
+                             '<br><br>谢谢！<br>技术支持：测开团队<body></html>'
 
     if request.method == 'POST':
         email_prefix = request.POST['email_prefix']
@@ -356,7 +356,7 @@ def send_forget_password_email(request, pk):
         LdapUserEmailVerifyRecord.objects.create(ldap_server_id=pk, dn=this_dn, token=token, email=email)
         # 发邮件，包含验证串
         # 发送邮件功能-------------
-        subject = '[{}] Please reset your password'.format(settings.SITE_NAME)  # 主题
+        subject = '[{}] LDAP账号忘记提醒'.format(settings.SITE_NAME)  # 主题
         sender = settings.EMAIL_FROM  # 发送邮箱，已经在settings.py设置，直接导入
         receiver = [email]  # 目标邮箱
         html_message = email_content_template.format(token=token, domain=settings.DOMAIN_NAME)  # 发送html格式

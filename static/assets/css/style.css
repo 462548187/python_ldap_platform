@@ -8786,6 +8786,10 @@ textarea.tt-hint {
 .form-group {
   margin-bottom: 1rem; }
 
+.form-group .forget-password {
+  float: right;
+}
+
 .form-text {
   display: block;
   margin-top: 0.25rem; }
@@ -22644,7 +22648,8 @@ select {
     border: 1px solid #e8ebf1;
     border-radius: 0px;
     outline: none;
-    color: #c9c8c8; }
+    /*color: #c9c8c8; */
+  }
     select.form-control.border-primary, select.border-primary, .email-compose-fields .select2-container--default select.border-primary.select2-selection--multiple, .select2-container--default select.border-primary.select2-selection--single, .select2-container--default .select2-selection--single select.border-primary.select2-search__field {
       outline: 1px solid #727cf5; }
       select.form-control.border-primary:focus, select.border-primary:focus, .email-compose-fields .select2-container--default select.border-primary.select2-selection--multiple:focus, .select2-container--default .select2-selection--single select.border-primary.select2-search__field:focus {
@@ -24118,5 +24123,3 @@ div.tagsinput {
 
 .wizard.vertical > .actions {
   margin-top: 8px; }
-
-/*# sourceMappingURL=../maps/demo_1/style.css.map */

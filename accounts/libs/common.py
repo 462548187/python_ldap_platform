@@ -291,13 +291,13 @@ def get_or_none(model, *args, **kwargs):
 
 def send_ldap_password(username, nickname, email, password):
     email_content_template = '<html><body>{nickname}, 您好：' \
-                             '<br>我们为您开通了统一账号' \
+                             '<br>我们为您开通了LDAP统一账号' \
                              '<br><br>用户名: {username}' \
                              '<br>密码: {password}' \
                              '<br><br>重置或修改密码可以访问 {sso_address}' \
-                             '<br>您可以使用此账号登录内部系统,详情参见内部wiki' \
-                             '<br><br>Thanks,<br>The Ops Team<body></html>'
-    subject = '[运维通知] 统一账号开通提醒'
+                             '<br>您可以使用此账号登录内部系统' \
+                             '<br><br>谢谢,<br>技术支持：测开团队<body></html>'
+    subject = '[{}] LDAP账号开通提醒'.format(settings.SITE_NAME)
     sender = settings.EMAIL_FROM  # 发送邮箱，已经在settings.py设置，直接导入
     receiver = [email]  # 目标邮箱
     html_message = email_content_template.format(username=username, nickname=nickname, password=password, sso_address=settings.DOMAIN_NAME)  # 发送html格式

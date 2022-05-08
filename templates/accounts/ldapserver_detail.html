@@ -111,19 +111,6 @@
             order: [[2, "desc"]],
             columnDefs: [
                 {
-                    targets: 4,
-                    data: "edit",
-                    title: "操作",
-                    render: function (data, type, row, meta) {
-                        if ('edit' in row.attributes) {
-                            return row.attributes.edit
-                        } else {
-                            return '编辑<icon-edit> </i>'
-                        }
-                    }
-
-                },
-                {
                     targets: 3,
                     data: "telephoneNumber",
                     title: "手机号码",
